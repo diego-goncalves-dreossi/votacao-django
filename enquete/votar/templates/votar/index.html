@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação Página Inicial</title>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+        main{
+            background-color: white;
+            border: 10000px 10px 10px black;
+            padding: 1px 10px 10px 10px;
+            border: 2px solid green;
+            border-radius: 3px;
+        }
+        a{
+            text-decoration: none;
+            color: darkgreen;
+        }
+        h1{
+            text-align: center;
+        }
+
+        a#voltar{
+            display: block;
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Lista de perguntas</h1>
+        {% if ultimas_perguntas_lista %}
+        <ul>
+            {% for questao in ultimas_perguntas_lista %}
+                <li><a href="{% url 'votar:vote' questao.id %}">{{questao.questao_texto}}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>Sem perguntas disponíveis</p>
+        {% endif %}
+
+        <a id="voltar" href="{% url 'inicio:inicio'%}">Voltar</a>
+    </main>
+    
+</body>
+</html>

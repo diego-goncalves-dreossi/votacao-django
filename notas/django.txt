@@ -1,0 +1,89 @@
+Vídeo base: https://www.youtube.com/watch?v=DNGI5aD9MJs
+
+Django é um framework, um conjunto de funcionalidades prontas, da linguagem Python, 
+especializado em criação de sites, aplicações web.
+
+Para projetos é sempre bom criar um ambiente virtual (diretório próprio de um projeto onde
+estão localizados as dependencias que o projeto precisa, sem precisar instalar no 
+computador, apenas no projeto).
+Criar ambinete virtual: python -m venv venv
+Para ativar av: .\venv\Scripts\Activate.ps1 (ps1 se for no Power Shell, bat se for no cmd)
+
+* Nos projetos Django o banco de dados SQlite vem por padrão.
+Para usar o django precisamos instala-lo. Para fazer isso, assim como para qualquer outra
+biblioteca, é só digitarmos pip install (biblioteca) quando o ambiente estiver ativado.
+
+Model: classe que remete ao banco de dados
+View: funções python que trabalham na lógica.
+Template: parte gráfica
+
+Começar projeto django
+django-admin startproject nome_projeto
+Se cria uma pasta com arquivos base do projeto.
+- O manage.py é o arquivo onde está todos os comandos para conseguirmos rodar o site e
+todas as funcionalidades necessárias.
+* python manage.py runserver é um comando que roda o servidor local, permitindo rodar o projeto
+no computador. Se funcionar uma página introdutória com um foguete irá aparecer.
+- Dentro do projeto criamos Aplicativos, que nesse caso são partes do projeto.
+* Para criar o aplicativo: python manage.py startapp nome_app
+- views.py é um arquivo do aplicativo onde estão localizadas as vizualizações do projeto, 
+as suas páginas, que são acessadas por função através de urls.
+* As urls estão em arquivos proprios (url.py) dentro dos diretórios dos aplicativos.
+- O arquivo urls.py é onde fica localizado as rotas do projeto. Para cada App incluido
+no projeto precisamos incluir o arquivo urls.py manualmente.
+
+- path() é a função para criar uma url de um projeto, ela fica dentro da cosntante urlpatterns em urls.py.
+- path tem 2 parâmetros, o nome da url e o que irá acontecer, para onde irá, uma função que informará a 
+lógica do sistema, e podemos colocar um name, que facilita chamadas.
+- Nos arquivos urls.py precisaremos importar o views.py da pasta do app também.
+* Precisamos colocar todas as urls dos aplicativos no arquivo urls.py base do projeto django
+
+* No urls.py da pasta base para facilitar podemos incluir todas as urls dos outros arquivos
+com path('app/', include('app.urls')).
+
+- No projeto django/settings.py que fazemos as configurações mais gerais, como TIME_ZONE
+e linguagem.
+
+python manage.py migrate
+- cria tabelas de banco de dados usando db.sqlite3
+- precisa ser criado primeiro antes de se criar um superusuario 
+para a página de administração do django.
+
+Modelo é a forma como os dados vão ser tratados no banco de dados, a modelagem da informação.
+- Toda vez que criamos um app num projeto django precisamos atualizar
+a lista INSTALLED_APPS do setting.py
+
+* python manage.py makemigrations (geral) cria modelos de banco de dados.
+* python manage.py migrate : migra os dados de fato.
+
+- Ambiente Shell: criado no terminal, podemos manipular os modelos, ver como estão as coisas.
+- Também podemos fazer isso diretamente no admin
+
+Shell
+* Exemplos usando projeto votacao
+
+from votar.models import Questao, Escolha
+# Importa tabelas
+Questao.objects.all()
+# Mostra todos os objetos instanciados da classe
+
+q = Questao(questao_texto="Já curtiu esse vídeo?",pub_data=timezone.now())
+# Declara objeto
+
+q.save()
+# Salva objetos na tabela
+
+q.id retorna o id
+q.questao_texto retorna o texto
+q = Questao.objects.get(id=1)
+# Captura objeto
+quit() sai do shell
+# Cria Escolhas usando como chave estrangeira a pergunta
+q.escolha_set.create(escolha_texto='',votos=0)
+
+O Django já possui uma página de administrador do sistema pronta, só é necessário fazer as
+configurações.
+python manage.py createsuperuser - cria um super usuário para usar dashboard de administrador.
+
+Os arquivos html, js e css ficam em uma pasta template, e é boa prática criar pastas
+com os nomes dos apps que irão usar os arquivos.

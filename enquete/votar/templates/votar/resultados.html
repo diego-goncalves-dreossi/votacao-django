@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado da enquete</title>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+        main{
+            background-color: white;
+            border: 10000px 10px 10px black;
+            padding: 1px 10px 10px 10px;
+            border: 2px solid green;
+            border-radius: 3px;
+        }
+
+      
+        
+        a{
+            display: block;
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>{{ questao.questao_texto}}</h1>
+        
+        <ul>
+            {% for escolha in questao.escolha_set.all %}
+                <li>{{ escolha.escolha_texto }} -- {{ escolha.votos }} voto{{escolha.votos|pluralize}}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'votar:vote' questao.id %}">Votar outra vez?</a>
+        <br>
+        <a  href="{% url 'votar:index'%}">Ver outra pergunta?</a>
+        <br>
+        <a id="voltar" href="{% url 'inicio:inicio'%}">Início</a>
+    </main>
+    
+</body>
+</html>

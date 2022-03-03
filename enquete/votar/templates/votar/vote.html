@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote na enquete</title>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+        main{
+            background-color: white;
+            border: 10000px 10px 10px black;
+            padding: 1px 10px 10px 10px;
+            border: 2px solid green;
+            border-radius: 3px;
+        }
+
+        div{
+            display: flex;
+            justify-content: center;
+        }
+
+        #btnvote{
+            background-color: rgb(24, 78, 36);
+            color: azure;
+            font-weight: bold;
+            width: 80px;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <main>
+        
+            <form action="{% url 'votar:vote' questao.id %}" method="post">
+                {% csrf_token %}
+        
+                <fieldset>
+                    <legend><h1>{{ questao.questao_texto}}</h1></legend>
+                    {% if mensagem_erro %}<p><strong>{{mensagem_erro}}</strong></p>{% endif %}
+        
+                    {% for escolha in questao.escolha_set.all %}
+                        <input type="radio" name="escolha" id="escolha{{forloop.counter}}" value="{{escolha.id}}">
+                        <label for="escolha{{forloop.counter}}">{{escolha.escolha_texto}}</label><br>
+        
+                    {% endfor %}
+                </fieldset>
+                <br>
+                <div><input id="btnvote" type="submit" value="Vote"></div>
+        
+        
+        
+            </form>
+    </main>
+
+
+    
+</body>
+</html>

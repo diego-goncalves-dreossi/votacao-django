@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Início da Votação</title>
+    
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+        main{
+            background-color: white;
+            border: 10000px 10px 10px black;
+            padding: 1px 10px 10px 10px;
+            border: 2px solid green;
+            border-radius: 3%;
+        }
+        h1{
+            text-align: center;
+            
+        }
+        a{
+            text-decoration: none;
+        }
+
+        h1 > a{
+            color:darkgreen;
+            
+        }
+        p{
+            text-align: center;
+        }
+        img#minhafoto{
+            width: 160px;
+            height: 160px;
+            
+        }
+        section{
+            display:flex;
+            justify-content:space-around;
+            
+        }
+
+        img#ht{
+            border: 1px solid black;
+            width: 160px;
+            height: 160px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Olá Mundo!</h1>
+        <p>Este é um simples site de contagem de votos de algumas perguntas.</p>
+        <p>Criado para aprender a utilizar o framework Django, da linguagem Python e desenvolvido para desenvolvimento web.</p>
+        <p>Base veio de um vídeo do canal <a href="https://www.youtube.com/c/HashtagPrograma%C3%A7%C3%A3o">Hashtag Programação</a> e diferenças foram feitas por mim <a href="https://www.linkedin.com/in/diego-dreossi-64388320a/">Diego Gonçalves Dreossi</a>.</p>
+        <h1><a href="{% url 'votar:index' %}">ENTRAR</a></h1>
+
+
+        <section>
+            <img id="ht" src="https://yt3.ggpht.com/ytc/AKedOLQ4Vqy5fM8gj0XBjlQdk2nhUceTSOsBK6R-2TYc=s176-c-k-c0x00ffffff-no-rj" alt="Hashtag Programação">
+            
+            <img id="minhafoto"src="https://media-exp1.licdn.com/dms/image/C4D03AQHjVTqMdHouRw/profile-displayphoto-shrink_400_400/0/1617118352924?e=1651104000&v=beta&t=UacpmcXhp7NinjBEhT7lrxxftTBt08T8ZCfv483tarE" alt="Diego Dreossi">
+        </section>
+
+        
+    </main>
+    
+</body>
+</html>
